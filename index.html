@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museo Virtual de Roma</title>
+     <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #4e4e4e);
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            color: #ffc107;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            width: 100%;
+        }
+
+        nav button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            color: #fff;
+            background: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        nav button:hover {
+            background: #45a049;
+            transform: translateY(-3px);
+        }
+
+        nav button:active {
+            transform: translateY(0);
+        }
+
+        .content-section {
+            display: none;
+            margin: 20px 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            width: 80%;
+        }
+
+        .question-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            width: 60%;
+            text-align: center;
+        }
+
+        .question-container button {
+            display: block;
+            margin: 1rem auto;
+            padding: 0.8rem;
+            background-color: #ffc107;
+            color: #333;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .question-container button:hover {
+            background-color: #f8a800;
+        }
+
+        .puzzle-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem;
+            gap: 10px;
+            max-width: 600px;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .puzzle-btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+        }
+
+        .puzzle-btn:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            color: #ffc107;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Museo Virtual de Roma</h1>
+    <p>Explora la historia y cultura de Roma a través de nuestras salas temáticas.</p>
+</header>
+
+<nav>
+    <button onclick="showSection('intro')">Introducción</button>
+    <button onclick="showSection('arte')">Arte y Escultura</button>
+    <button onclick="showSection('arquitectura')">Arquitectura</button>
+    <button onclick="showSection('mitologia')">Mitología</button>
+    <button onclick="showPuzzle()">Rompecabeza</button>
+</nav>
+
+<!-- Introducción -->
+<section id="intro" class="content-section">
+    <h2>Bienvenido al Museo Virtual de Roma</h2>
+    <p>Descubre la fascinante historia de Roma, desde sus inicios hasta el esplendor de su Imperio.</p>
+</section>
+
+<!-- Arte y Escultura -->
+<section id="arte" class="content-section">
+    <h2>Arte y Escultura</h2>
+    <p>Explora las esculturas y mosaicos que representan la cultura y los personajes de la Antigua Roma.</p>
+    <button onclick="askQuestion('arte')">Comenzar Trivia</button>
+    <div id="arte-question" class="question-container" style="display: none;">
+        <p>¿Quién fue el emperador romano más famoso?</p>
+        <button onclick="checkAnswer('arte', true)">Augusto</button>
+        <button onclick="checkAnswer('arte', false)">Nerón</button>
+        <button onclick="checkAnswer('arte', false)">Calígula</button>
+    </div>
+</section>
+
+<!-- Arquitectura -->
+<section id="arquitectura" class="content-section">
+    <h2>Arquitectura y Urbanismo</h2>
+    <p>Conoce la arquitectura romana, incluyendo el Foro, templos y anfiteatros.</p>
+    <button onclick="askQuestion('arquitectura')">Comenzar Trivia</button>
+    <div id="arquitectura-question" class="question-container" style="display: none;">
+        <p>¿Qué estructura es conocida como el "Corazón de Roma"?</p>
+        <button onclick="checkAnswer('arquitectura', true)">El Foro Romano</button>
+        <button onclick="checkAnswer('arquitectura', false)">El Coliseo</button>
+        <button onclick="checkAnswer('arquitectura', false)">El Panteón</button>
+    </div>
+</section>
+
+<!-- Mitología -->
+<section id="mitologia" class="content-section">
+    <h2>Mitología y Religión</h2>
+    <p>Aprende sobre los dioses romanos y las creencias religiosas.</p>
+    <button onclick="askQuestion('mitologia')">Comenzar Trivia</button>
+    <div id="mitologia-question" class="question-container" style="display: none;">
+        <p>¿Quién era el dios del sol en la mitología romana?</p>
+        <button onclick="checkAnswer('mitologia', true)">Sol</button>
+        <button onclick="checkAnswer('mitologia', false)">Júpiter</button>
+        <button onclick="checkAnswer('mitologia', false)">Marte</button>
+    </div>
+</section>
+
+<!-- Rompecabeza -->
+<div id="puzzle-container" class="content-section" style="display: none;">
+    <h2>Rompecabeza de Roma</h2>
+    <div class="puzzle-piece" id="puzzle1" draggable="true" ondragstart="drag(event)" style="background-image: url('images/image1.jpg');"></div>
+    <div class="puzzle-piece" id="puzzle2" draggable="true" ondragstart="drag(event)" style="background-image: url('images/image2.jpg');"></div>
+    <div class="puzzle-piece" id="puzzle3" draggable="true" ondragstart="drag(event)" style="background-image: url('images/image3.jpg');"></div>
+    <div class="puzzle-piece" id="puzzle4" draggable="true" ondragstart="drag(event)" style="background-image: url('images/image4.jpg');"></div>
+    <div class="puzzle-piece" id="puzzle5" draggable="true" ondragstart="drag(event)" style="background-image: url('images/image5.jpg');"></div>
+    <div class="puzzle-piece" id="puzzle6" draggable="true" ondragstart="drag(event)" style="background-image: url('images/image6.jpg');"></div>
+    <div class="puzzle-piece" id="puzzle7" draggable="true" ondragstart="drag(event)" style="background-image: url('images/image7.jpg');"></div>
+    <div class="puzzle-piece" id="puzzle8" draggable="true" ondragstart="drag(event)" style="background-image: url('images/image8.jpg');"></div>
+    <div class="puzzle-piece" id="puzzle9" draggable="true" ondragstart="drag(event)" style="background-image: url('images/image9.jpg');"></div>
+
+    <!-- Zona donde se colocarán las piezas -->
+    <div id="puzzle-area" style="width: 300px; height: 300px; border: 2px dashed #fff; margin-top: 20px;"></div>
+
+    <button class="puzzle-btn" onclick="checkPuzzle()">Verificar Rompecabeza</button>
+</div>
+
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => section.style.display = 'none');
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    function askQuestion(sectionId) {
+        const questionContainers = document.querySelectorAll('.question-container');
+        questionContainers.forEach(container => container.style.display = 'none');
+        document.getElementById(sectionId + '-question').style.display = 'block';
+    }
+
+    function checkAnswer(section, correct) {
+        const feedback = correct ? '¡Correcto!' : 'Incorrecto, intenta nuevamente.';
+        alert(feedback);
+    }
+
+    function showPuzzle() {
+        document.getElementById('puzzle-container').style.display = 'block';
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+</script>
+
+ <!-- Agregar las imágenes flotantes -->
+        <div class="floating-images">
+            <img src="coliseo.png" alt="Coliseo" class="floating-image" />
+            <img src="foro.png" alt="Foro Romano" class="floating-image" />
+            <img src="panteon.png" alt="Panteón" class="floating-image" />
+ </div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
